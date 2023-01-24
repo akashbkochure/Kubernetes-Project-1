@@ -1,0 +1,5 @@
+[Ansible]
+localhost
+
+[kubernetes]
+<Master-node public ip>
