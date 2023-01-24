@@ -1,0 +1,33 @@
+---
+- name: Build and push Docker image
+  hosts: ansible-server
+  tasks:
+  - name: Stop and remove existing Docker container
+    command: docker stop simple-devops-image && docker rm -f simple-devops-image
+    ignore_errors: true
+
+  - name: Remove existing Docker image
+    command: docker image rm -f simple-devops-image
+    ignore_errors: true
+
+  - name: Change directory to /opt/k8s-lab
+    command: cd /opt/k8s-lab
+
+  - name: Build new Docker image
+    command: docker build -t simple-devops-image:latest .
+
+  - name: Tag the image
+    command: docker tag simple-devops-image:latest akashbkochure/simple-devops-image:latest
+
+  - name: Login to Docker Hub
+    command: docker login -u akashbkochure -p MaYuR940206
+
+  - name: Push the image to Docker Hub
+    command: docker push akashbkochure/simple-devops-image:latest
+
+  - name: Remove local copy of image
+    command: docker rmi simple-devops-image:latest akashbkochure/simple-devops-image:latest
+
+  - name: Remove 'tomcat:latest' image
+    command: docker rmi tomcat:latest
+
