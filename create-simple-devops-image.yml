@@ -20,7 +20,7 @@
     command: docker tag simple-devops-image:latest akashbkochure/simple-devops-image:latest
 
   - name: Login to Docker Hub
-    command: docker login -u akashbkochure -p MaYuR940206
+    command: docker login -u akashbkochure -p *********
 
   - name: Push the image to Docker Hub
     command: docker push akashbkochure/simple-devops-image:latest
